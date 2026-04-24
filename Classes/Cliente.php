@@ -67,12 +67,10 @@ class Cliente {
 
     /* Métodos da Classe */
 
-    /* Calcular a idade do Cliente */
     public function getIdade() {
         return date("Y") - date("Y", strtotime($this->dataNascimento));
     }
 
-    /* Verifiacar a Idade do Cliente se ele maior de 18 anos ou menor de Idade */
     public function podeAlugar($classificacao) {
         $idade = $this->getIdade();
 
