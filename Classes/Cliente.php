@@ -2,15 +2,15 @@
 
 class Cliente {
 
-    private $id;
-    private $nome;
-    private $cpf;
-    private $telefone;
-    private $dataNascimento;
-    private $endereco;
+    private int $id;
+    private string $nome;
+    private string $cpf;
+    private string $telefone;
+    private string $dataNascimento;
+    private string $endereco;
     
     /* Construtor da Classe Cliente */
-    public function __construct($id, $nome, $cpf, $telefone, $dataNascimento, $endereco) {
+    public function __construct(int $id, string $nome, string $cpf, string $telefone, string $dataNascimento, string $endereco) {
         $this->id = $id;
         $this->nome = $nome;
         $this->cpf = $cpf;
@@ -20,55 +20,58 @@ class Cliente {
     }
 
     /* GETTERS */
-    public function getId() {
+    public function getId() : int{
         return $this->id;
     }
 
-    public function getNome() {
+    public function getNome() : string {
         return $this->nome;
     }
 
-    public function getCpf() {
+    public function getCpf() : string {
         return $this->cpf;
     }
 
-    public function getTelefone() {
+    public function getTelefone() : string {
         return $this->telefone;
     }
 
-    public function getDataNascimento() {
+    public function getDataNascimento() : string {
         return $this->dataNascimento;
     }
 
-    public function getEndereco() {
+    public function getEndereco() : string {
         return $this->endereco;
     }
 
     /* SETTERS */
-    public function setNome($nome) {
+    public function setNome($nome) : void {
         $this->nome = $nome;
     }
 
-    public function setCpf($cpf) {
+    public function setCpf($cpf) : void{
         $this->cpf = $cpf;
     }
 
-    public function setTelefone($telefone) {
+    public function setTelefone($telefone) : void{
         $this->telefone = $telefone;
     }
 
-    public function setDataNascimento($dataNascimento) {
+    public function setDataNascimento($dataNascimento) : void{
         $this->dataNascimento = $dataNascimento;
     }
 
-    public function setEndereco($endereco) {
+    public function setEndereco($endereco) : void{
         $this->endereco = $endereco;
     }
 
     /* Métodos da Classe */
 
-    public function getIdade() {
-        return date("Y") - date("Y", strtotime($this->dataNascimento));
+    public function getIdade() : string{
+       $anoAtual = date('Y');
+       $anoNascimento = substr($this->dataNascimento, strrpos($this->dataNascimento,'/')+1);
+
+       return (string)($anoAtual - $anoNascimento);
     }
 
     public function podeAlugar($classificacao) {
@@ -84,13 +87,12 @@ class Cliente {
     }
 
     public function exibirDados() {
-        echo "ID: " . $this->id . "<br>";
-        echo "Nome: " . $this->nome . "<br>";
-        echo "CPF: " . $this->cpf . "<br>";
-        echo "Telefone: " . $this->telefone . "<br>";
-        echo "Data Nascimento: " . $this->dataNascimento . "<br>";
-        echo "Endereço: " . $this->endereco . "<br>";
-        echo "Idade: " . $this->getIdade() . "<br>";
+        echo "Nome: " . $this->getNome() . PHP_EOL;
+        echo "CPF: " . $this->getCpf() . PHP_EOL;
+        echo "Telefone: " . $this->getTelefone() . PHP_EOL;
+        echo "Data Nascimento: " . $this->getDataNascimento() . PHP_EOL;
+        echo "Endereço: " . $this->getEndereco() . PHP_EOL;
+        echo "Idade: " . $this->getIdade() . PHP_EOL;
     }
 }
 

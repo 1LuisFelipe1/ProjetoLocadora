@@ -2,16 +2,16 @@
 
 class Filme {
 
-    private $id;
-    private $titulo;
-    private $genero;
-    private $ano;
-    private $classificacao;
-    private $quantidade;
-    private $precoLocacao;
+    private int $id;
+    private string $titulo;
+    private string $genero;
+    private int $ano;
+    private string $classificacao;
+    private int $quantidade;
+    private float $precoLocacao;
 
     /* Construtor da Classe Filme */
-     public function __construct($id, $titulo, $genero, $ano, $classificacao, $quantidade, $precoLocacao) {
+     public function __construct(int $id, string $titulo, string $genero, int $ano, string $classificacao, int $quantidade, float $precoLocacao) {
         $this->id = $id;
         $this->titulo = $titulo;
         $this->genero = $genero;
