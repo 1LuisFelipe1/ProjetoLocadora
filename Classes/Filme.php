@@ -10,7 +10,7 @@ class Filme {
     private $quantidade;
     private $precoLocacao;
 
-    /* Construtor da Classe */
+    /* Construtor da Classe Filme */
      public function __construct($id, $titulo, $genero, $ano, $classificacao, $quantidade, $precoLocacao) {
         $this->id = $id;
         $this->titulo = $titulo;
