@@ -19,7 +19,7 @@ class Locacao
         $this->filme = $filme;
         $this->diasLocados = $diasLocados;
         $this->dataLocacao = new DateTime();
-        $this->dataDevolucaoPrevista = (new DateTime()) -> modify("+{$diasLocados} dias");
+        $this->dataDevolucaoPrevista = (new DateTime()) -> modify("+{$diasLocados} days");
         $this->dataDevolucaoReal = null;
         $this->valorTotal = $this->calcularValor();
         $this->multa = 0.0;
@@ -29,6 +29,18 @@ class Locacao
     /* Métodos Funções da Classe Locacao */
     public function calcularValor() : float {
         return $this->diasLocados * $this->filme->getPrecoLocacao();
+    }
+
+    public function getCliente() : Cliente {
+        return $this->cliente;
+    }
+
+    public function getFilme() : Filme {
+        return $this->filme;
+    }
+
+    public function getDiasLocados() : int {
+        return $this->diasLocados;
     }
 
     public function calcularMulta() : float {
