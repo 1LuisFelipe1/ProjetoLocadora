@@ -13,6 +13,7 @@ class Locacao
     private float $multa;
     private string $status;
 
+    /* Construtor da Classe Locacao */
     public function __construct(Cliente $cliente, Filme $filme, int $diasLocados) {
         $this->cliente = $cliente;
         $this->filme = $filme;
@@ -25,6 +26,7 @@ class Locacao
         $this->status = 'Ativa!';
     }
 
+    /* Métodos Funções da Classe Locacao */
     public function calcularValor() : float {
         return $this->diasLocados * $this->filme->getPrecoLocacao();
     }
