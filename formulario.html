@@ -1,47 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locadora de Filmes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=cliente_form.php">
+    <title>Redirecionando | DiguinhoMax</title>
 </head>
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="card shadow">
-                    <div class="card-body p-4">
-                        <h1 class="card-title text-center mb-1">Cadastro</h1>
-                        <p class="text-muted text-center mb-4">Preencha as informações</p>
-                        <form action="index.php" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label">Nome completo</label>
-                                <input type="text" name="nome" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">CPF</label>
-                                <input type="text" name="cpf" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Telefone</label>
-                                <input type="tel" name="telefone" class="form-control" placeholder="(99) 99999-9999" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Data de nascimento</label>
-                                <input type="date" name="dataDeNascimento" class="form-control" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label">Endereço</label>
-                                <input type="text" name="endereco" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Enviar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+    <p>Redirecionando para o cadastro de cliente...</p>
+    <script>window.location.href = 'cliente_form.php';</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 
-class Filme {
-
+class Filme
+{
     private int $id;
     private string $titulo;
     private string $genero;
@@ -10,8 +10,8 @@ class Filme {
     private int $quantidade;
     private float $precoLocacao;
 
-    /* Construtor da Classe Filme */
-     public function __construct(int $id, string $titulo, string $genero, int $ano, string $classificacao, int $quantidade, float $precoLocacao) {
+    public function __construct(int $id, string $titulo, string $genero, int $ano, string $classificacao, int $quantidade, float $precoLocacao)
+    {
         $this->id = $id;
         $this->titulo = $titulo;
         $this->genero = $genero;
@@ -21,84 +21,101 @@ class Filme {
         $this->precoLocacao = $precoLocacao;
     }
 
-    /* GETTERS */
-     public function getId() {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getTitulo() {
+    public function getTitulo(): string
+    {
         return $this->titulo;
     }
 
-    public function getGenero() {
+    public function getGenero(): string
+    {
         return $this->genero;
     }
 
-    public function getAno() {
+    public function getAno(): int
+    {
         return $this->ano;
     }
 
-    public function getClassificacao() {
+    public function getClassificacao(): string
+    {
         return $this->classificacao;
     }
 
-    public function getQuantidade() {
+    public function getQuantidade(): int
+    {
         return $this->quantidade;
     }
 
-    public function getPrecoLocacao() {
+    public function getPrecoLocacao(): float
+    {
         return $this->precoLocacao;
     }
 
-    /* SETTERS */
-   public function setTitulo($titulo) {
+    public function setTitulo(string $titulo): void
+    {
         $this->titulo = $titulo;
     }
 
-    public function setGenero($genero) {
+    public function setGenero(string $genero): void
+    {
         $this->genero = $genero;
     }
 
-    public function setAno($ano) {
+    public function setAno(int $ano): void
+    {
         $this->ano = $ano;
     }
 
-    public function setClassificacao($classificacao) {
+    public function setClassificacao(string $classificacao): void
+    {
         $this->classificacao = $classificacao;
     }
 
-    public function setQuantidade($quantidade) {
+    public function setQuantidade(int $quantidade): void
+    {
         $this->quantidade = $quantidade;
     }
 
-    public function setPrecoLocacao($precoLocacao) {
+    public function setPrecoLocacao(float $precoLocacao): void
+    {
         $this->precoLocacao = $precoLocacao;
     }
 
-
-    /* Métodos da Classe */
-    public function alugar() {
-        if ($this->quantidade > 0) {
-            $this->quantidade--;
-            return true;
-        } else {
-            return false;
-        }
+    public function estaDisponivel(): bool
+    {
+        return $this->quantidade > 0;
     }
 
-    public function devolver() {
+    public function alugar(): bool
+    {
+        if (!$this->estaDisponivel()) {
+            return false;
+        }
+
+        $this->quantidade--;
+        return true;
+    }
+
+    public function devolver(): void
+    {
         $this->quantidade++;
     }
 
-    public function exibirDados() {
-        echo "ID: " . $this->id . "<br>";
-        echo "Título: " . $this->titulo . "<br>";
-        echo "Gênero: " . $this->genero . "<br>";
-        echo "Ano: " . $this->ano . "<br>";
-        echo "Classificação: " . $this->classificacao . "<br>";
-        echo "Quantidade: " . $this->quantidade . "<br>";
-        echo "Preço: " . $this->precoLocacao . "<br>";
+    public function exibirDados(): array
+    {
+        return [
+            'ID' => $this->id,
+            'Título' => $this->titulo,
+            'Gênero' => $this->genero,
+            'Ano' => $this->ano,
+            'Classificação' => $this->classificacao,
+            'Quantidade' => $this->quantidade,
+            'Preço' => $this->precoLocacao,
+        ];
     }
 }
-
-?>

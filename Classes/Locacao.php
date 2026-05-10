@@ -13,78 +13,123 @@ class Locacao
     private float $multa;
     private string $status;
 
-    /* Construtor da Classe Locacao */
-    public function __construct(Cliente $cliente, Filme $filme, int $diasLocados) {
+    public function __construct(Cliente $cliente, Filme $filme, int $diasLocados, ?int $id = null)
+    {
+        $this->id = $id ?? 0;
         $this->cliente = $cliente;
         $this->filme = $filme;
         $this->diasLocados = $diasLocados;
         $this->dataLocacao = new DateTime();
-        $this->dataDevolucaoPrevista = (new DateTime()) -> modify("+{$diasLocados} days");
+        $this->dataDevolucaoPrevista = (new DateTime())->modify("+{$diasLocados} days");
         $this->dataDevolucaoReal = null;
         $this->valorTotal = $this->calcularValor();
         $this->multa = 0.0;
-        $this->status = 'Ativa!';
+        $this->status = 'Ativa';
     }
 
-    /* Métodos Funções da Classe Locacao */
-    public function calcularValor() : float {
-        return $this->diasLocados * $this->filme->getPrecoLocacao();
+    public function getId(): int
+    {
+        return $this->id;
     }
 
-    public function getCliente() : Cliente {
+    public function getCliente(): Cliente
+    {
         return $this->cliente;
     }
 
-    public function getFilme() : Filme {
+    public function getFilme(): Filme
+    {
         return $this->filme;
     }
 
-    public function getDiasLocados() : int {
+    public function getDiasLocados(): int
+    {
         return $this->diasLocados;
     }
 
-    public function calcularMulta() : float {
+    public function getDataLocacao(): DateTime
+    {
+        return $this->dataLocacao;
+    }
+
+    public function getDataDevolucaoPrevista(): DateTime
+    {
+        return $this->dataDevolucaoPrevista;
+    }
+
+    public function getDataDevolucaoReal(): ?DateTime
+    {
+        return $this->dataDevolucaoReal;
+    }
+
+    public function getValorTotal(): float
+    {
+        return $this->valorTotal;
+    }
+
+    public function getMulta(): float
+    {
+        return $this->multa;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function calcularValor(): float
+    {
+        return $this->diasLocados * $this->filme->getPrecoLocacao();
+    }
+
+    public function estaFinalizada(): bool
+    {
+        return $this->status === 'Finalizada';
+    }
+
+    public function estaAtrasada(): bool
+    {
+        $referencia = $this->dataDevolucaoReal ?? new DateTime();
+        return $referencia > $this->dataDevolucaoPrevista;
+    }
+
+    public function calcularMulta(): float
+    {
         if (!$this->estaAtrasada()) {
             return 0.0;
         }
-        $hoje = new DateTime();
-        $referencia = $this->dataDevolucaoReal ?? $hoje;
 
-        $diasAtraso = $this->dataDevolucaoPrevista
-            ->diff($referencia)
-            ->days;
-
+        $referencia = $this->dataDevolucaoReal ?? new DateTime();
+        $diasAtraso = $this->dataDevolucaoPrevista->diff($referencia)->days;
         $this->multa = $diasAtraso * 2.0;
 
         return $this->multa;
     }
 
-    public function finalizarLocacao(DateTime $dataDevolucaoReal) : void {
+    public function finalizarLocacao(DateTime $dataDevolucaoReal): void
+    {
+        if ($this->estaFinalizada()) {
+            return;
+        }
+
         $this->dataDevolucaoReal = $dataDevolucaoReal;
         $this->multa = $this->calcularMulta();
         $this->valorTotal += $this->multa;
-        $this->status = 'Finalizada!';
+        $this->status = 'Finalizada';
     }
 
-    public function estaAtrasada() : bool {
-        $referencia = $this->dataDevolucaoReal ?? new DateTime();
-        return $referencia > $this->dataDevolucaoPrevista;
-    }
-
-    public function exibirDados() : array {
+    public function exibirDados(): array
+    {
         return [
-            'Cliente: ' => $this->cliente->getNome(),
-            'Filme: ' => $this->filme->getTitulo(),
-            'Data de locação: ' => $this->dataLocacao->format('d/m/Y'),
-            'Data Prevista: ' => $this->dataDevolucaoPrevista->format('d/m/Y'),
-            'Data Devolvida: ' => $this->dataDevolucaoReal
-                ? $this->dataDevolucaoReal->format('d/m/Y')
-                : 'Não devolvido',
-            'Dias Alugados: ' => $this->diasLocados,
-            'Valor: ' => $this->valorTotal,
-            'Multa: R$' => $this->multa,
-            'Status: ' => $this->status
+            'Cliente' => $this->cliente->getNome(),
+            'Filme' => $this->filme->getTitulo(),
+            'Data de locação' => $this->dataLocacao->format('d/m/Y'),
+            'Data prevista' => $this->dataDevolucaoPrevista->format('d/m/Y'),
+            'Data devolvida' => $this->dataDevolucaoReal ? $this->dataDevolucaoReal->format('d/m/Y') : 'Não devolvido',
+            'Dias alugados' => $this->diasLocados,
+            'Valor' => $this->valorTotal,
+            'Multa' => $this->multa,
+            'Status' => $this->status,
         ];
     }
-
 }

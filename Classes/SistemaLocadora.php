@@ -6,75 +6,100 @@ class SistemaLocadora
     private array $clientes = [];
     private array $locacoes = [];
 
-    public function __construct(array $filmes, array $clientes, array $locacoes){
-
+    public function __construct(array $filmes = [], array $clientes = [], array $locacoes = [])
+    {
         $this->filmes = $filmes;
         $this->clientes = $clientes;
         $this->locacoes = $locacoes;
     }
 
-    public function cadastrarFilme(Filme $filme) :void {
+    public function cadastrarFilme(Filme $filme): void
+    {
         $this->filmes[] = $filme;
     }
 
-    public function cadastrarCliente(Cliente$cliente) : void {
+    public function cadastrarCliente(Cliente $cliente): void
+    {
         $this->clientes[] = $cliente;
     }
 
-    public function realizarLocacao(Cliente $cliente, Filme $filme, int $dias) {
-        $locacao = new Locacao($cliente, $filme, $dias);
+    public function realizarLocacao(Cliente $cliente, Filme $filme, int $dias, ?int $id = null): Locacao
+    {
+        $locacao = new Locacao($cliente, $filme, $dias, $id);
         $this->locacoes[] = $locacao;
+
+        return $locacao;
     }
 
-    public function devolverLocacao(Locacao $locacao, DateTime $dataDevolucao) : void {
+    public function devolverLocacao(Locacao $locacao, DateTime $dataDevolucao): void
+    {
+        $jaFinalizada = $locacao->estaFinalizada();
         $locacao->finalizarLocacao($dataDevolucao);
-    }
 
-    public function listarFilmes(){
-        foreach($this->filmes as $filme) {
-            echo "Id: " . $filme->getId() . PHP_EOL;
-            echo "Titulo: " . $filme->getTitulo() . PHP_EOL;
-            echo "Genero: " . $filme->getGenero() . PHP_EOL;
-            echo "Ano: " . $filme->getAno() . PHP_EOL;
-            echo "Classificacao: " . $filme->getClassificacao() . PHP_EOL;
-            echo "Quantidade: " . $filme->getQuantidade() . PHP_EOL;
-            echo "Preco para alugar: " . $filme->getPrecoLocacao() . PHP_EOL;
+        if (!$jaFinalizada) {
+            $locacao->getFilme()->devolver();
         }
     }
 
-    public function listarClientes() {
-        foreach($this->clientes as $cliente) {
-            echo "ID: " . $cliente->getId() . PHP_EOL;
-            echo "Nome: " . $cliente->getNome() . PHP_EOL;
-            echo "CPF: " . $cliente->getCpf() . PHP_EOL;
-            echo "Telefone: " . $cliente->getTelefone() . PHP_EOL;
-            echo "Data de Nascimento: " . $cliente->getDataNascimento() . PHP_EOL;
-            echo "Endereco: " . $cliente->getEndereco() . PHP_EOL;
-        }
+    public function listarFilmes(): array
+    {
+        return $this->filmes;
     }
 
-    public function listarLocacoes() : array {
+    public function listarClientes(): array
+    {
+        return $this->clientes;
+    }
+
+    public function listarLocacoes(): array
+    {
         return $this->locacoes;
     }
 
-    public function buscarFilme(int $id) {
-        foreach($this->filmes as $filme) {
-                if($filme->getId() == $id) {
-                echo "Id: " . $filme->getTitulo() . PHP_EOL;
-                return;
-                }
-            }
-        echo "Filme nao encontrado!";
-        }
-    public function buscarCliente(int $id) {
-        foreach($this->clientes as $cliente) {
-            if($cliente->getId() == $id) {
-                echo "ID: " . $cliente->getId() . PHP_EOL;
-                echo "Nome: " . $cliente->getNome() . PHP_EOL;
-                return;
-            }
-        }
-        echo "Cliente nao encontrado!";
+    public function listarLocacoesAtivas(): array
+    {
+        return array_values(array_filter($this->locacoes, function (Locacao $locacao) {
+            return !$locacao->estaFinalizada();
+        }));
     }
 
+    public function listarLocacoesFinalizadas(): array
+    {
+        return array_values(array_filter($this->locacoes, function (Locacao $locacao) {
+            return $locacao->estaFinalizada();
+        }));
+    }
+
+    public function buscarFilme(int $id): ?Filme
+    {
+        foreach ($this->filmes as $filme) {
+            if ($filme->getId() === $id) {
+                return $filme;
+            }
+        }
+
+        return null;
+    }
+
+    public function buscarCliente(int $id): ?Cliente
+    {
+        foreach ($this->clientes as $cliente) {
+            if ($cliente->getId() === $id) {
+                return $cliente;
+            }
+        }
+
+        return null;
+    }
+
+    public function buscarLocacao(int $id): ?Locacao
+    {
+        foreach ($this->locacoes as $locacao) {
+            if ($locacao->getId() === $id) {
+                return $locacao;
+            }
+        }
+
+        return null;
+    }
 }
