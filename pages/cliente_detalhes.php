@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $cliente = $sistema->buscarCliente((int)($_GET['id'] ?? 0));
 
 if (!$cliente) {
-    redirecionar('clientes.php');
+    redirecionar('pages/clientes.php');
 }
 
 $historico = locacoesDoCliente($sistema, $cliente);
@@ -14,7 +14,7 @@ renderHeader('Detalhes do cliente', 'clientes');
 renderPageHeader(
     $cliente->getNome(),
     'Dados completos do cliente e histórico de locações.',
-    '<a class="btn btn-primary" href="nova_locacao.php?cliente_id=' . h($cliente->getId()) . '"><i class="bi bi-bag-plus me-2"></i>Nova locação</a>'
+    '<a class="btn btn-primary" href="pages/nova_locacao.php?cliente_id=' . h($cliente->getId()) . '"><i class="bi bi-bag-plus me-2"></i>Nova locação</a>'
 );
 ?>
 

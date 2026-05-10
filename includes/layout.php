@@ -3,12 +3,12 @@
 function renderHeader(string $titulo, string $ativo = 'dashboard'): void
 {
     $links = [
-        'dashboard' => ['href' => 'index.php', 'icone' => 'bi-speedometer2', 'label' => 'Dashboard'],
-        'clientes' => ['href' => 'clientes.php', 'icone' => 'bi-people', 'label' => 'Clientes'],
-        'filmes' => ['href' => 'filmes.php', 'icone' => 'bi-film', 'label' => 'Filmes'],
-        'nova-locacao' => ['href' => 'nova_locacao.php', 'icone' => 'bi-bag-plus', 'label' => 'Nova locação'],
-        'locacoes' => ['href' => 'locacoes.php', 'icone' => 'bi-arrow-left-right', 'label' => 'Locações'],
-        'relatorios' => ['href' => 'relatorios.php', 'icone' => 'bi-bar-chart', 'label' => 'Relatórios'],
+        'dashboard' => ['href' => 'pages/index.php', 'icone' => 'bi-speedometer2', 'label' => 'Dashboard'],
+        'clientes' => ['href' => 'pages/clientes.php', 'icone' => 'bi-people', 'label' => 'Clientes'],
+        'filmes' => ['href' => 'pages/filmes.php', 'icone' => 'bi-film', 'label' => 'Filmes'],
+        'nova-locacao' => ['href' => 'pages/nova_locacao.php', 'icone' => 'bi-bag-plus', 'label' => 'Nova locação'],
+        'locacoes' => ['href' => 'pages/locacoes.php', 'icone' => 'bi-arrow-left-right', 'label' => 'Locações'],
+        'relatorios' => ['href' => 'pages/relatorios.php', 'icone' => 'bi-bar-chart', 'label' => 'Relatórios'],
     ];
     ?>
     <!doctype html>
@@ -16,17 +16,17 @@ function renderHeader(string $titulo, string $ativo = 'dashboard'): void
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="<?= BASE_URL ?>/">
         <title><?= h($titulo) ?> | DiguinhoMax</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-        <link href="assets/css/app.css" rel="stylesheet">
+        <link href="<?= BASE_URL ?>/assets/css/app.css" rel="stylesheet">
     </head>
     <body>
     <nav class="navbar navbar-expand-lg app-mobile-nav d-lg-none">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
-                <span class="brand-mark">D</span>
-                DiguinhoMax
+            <a class="navbar-brand" href="pages/index.php">
+                <img src="<?= BASE_URL ?>/assets/DiguinhoLogo.png" alt="DiguinhoMax" height="60">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Abrir menu">
                 <span class="navbar-toggler-icon"></span>
@@ -46,12 +46,8 @@ function renderHeader(string $titulo, string $ativo = 'dashboard'): void
 
     <div class="app-shell">
         <aside class="app-sidebar d-none d-lg-flex">
-            <a class="brand" href="index.php">
-                <span class="brand-mark">D</span>
-                <span>
-                    <strong>DiguinhoMax</strong>
-                    <small>Locadora de filmes</small>
-                </span>
+            <a class="brand" href="pages/index.php">
+                <img src="<?= BASE_URL ?>/assets/DiguinhoLogo.png" alt="DiguinhoMax" height="80">
             </a>
 
             <nav class="sidebar-nav">

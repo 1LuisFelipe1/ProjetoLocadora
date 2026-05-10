@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $locacoesAtivas = $sistema->listarLocacoesAtivas();
 $locacoesFinalizadas = array_slice(array_reverse($sistema->listarLocacoesFinalizadas()), 0, 6);
@@ -10,7 +10,7 @@ renderFeedback();
 renderPageHeader(
     'Locações ativas',
     'Acompanhe prazos, valores e devoluções pendentes da DiguinhoMax.',
-    '<a class="btn btn-primary" href="nova_locacao.php"><i class="bi bi-bag-plus me-2"></i>Nova locação</a>'
+    '<a class="btn btn-primary" href="pages/nova_locacao.php"><i class="bi bi-bag-plus me-2"></i>Nova locação</a>'
 );
 ?>
 
@@ -51,7 +51,7 @@ renderPageHeader(
                         <td><?= moeda($locacao->getValorTotal()) ?></td>
                         <td><?= badgeStatusLocacao($locacao) ?></td>
                         <td class="text-end">
-                            <a class="btn btn-sm btn-warning" href="devolucao.php?id=<?= h($locacao->getId()) ?>">
+                            <a class="btn btn-sm btn-warning" href="pages/devolucao.php?id=<?= h($locacao->getId()) ?>">
                                 <i class="bi bi-arrow-counterclockwise me-1"></i>Devolver
                             </a>
                         </td>
@@ -66,7 +66,7 @@ renderPageHeader(
 <section class="content-surface">
     <div class="section-title">
         <h2>Histórico recente</h2>
-        <a href="relatorios.php" class="btn btn-sm btn-outline-primary">Ver relatório</a>
+        <a href="pages/relatorios.php" class="btn btn-sm btn-outline-primary">Ver relatório</a>
     </div>
 
     <?php if (empty($locacoesFinalizadas)): ?>

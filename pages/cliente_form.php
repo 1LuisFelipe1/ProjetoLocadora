@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $erro = '';
 $valores = [
@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (in_array('', $valores, true)) {
         $erro = 'Preencha todos os campos obrigatórios.';
+    } elseif (strlen(preg_replace('/\D/', '', $valores['cpf'])) !== 11) {
+        $erro = 'Informe um CPF válido com 11 dígitos.';
     } else {
         $cliente = new Cliente(
             proximoId('clienteId'),
@@ -33,8 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         $sistema->cadastrarCliente($cliente);
-        salvarSistema($sistema);
-        redirecionar('clientes.php?sucesso=cliente');
+        redirecionar('pages/clientes.php?sucesso=cliente');
     }
 }
 
@@ -69,7 +70,7 @@ renderPageHeader('Cadastro de cliente', 'Registre os dados pessoais para permiti
             <input class="form-control" id="endereco" name="endereco" value="<?= h($valores['endereco']) ?>" required>
         </div>
         <div class="col-12 d-flex gap-2 justify-content-end">
-            <a class="btn btn-outline-secondary" href="clientes.php">Cancelar</a>
+            <a class="btn btn-outline-secondary" href="pages/clientes.php">Cancelar</a>
             <button class="btn btn-primary" type="submit"><i class="bi bi-check2 me-2"></i>Salvar cliente</button>
         </div>
     </form>

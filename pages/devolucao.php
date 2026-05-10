@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $locacao = $sistema->buscarLocacao((int)($_GET['id'] ?? ($_POST['id'] ?? 0)));
 $erro = '';
 
 if (!$locacao || $locacao->estaFinalizada()) {
-    redirecionar('locacoes.php');
+    redirecionar('pages/locacoes.php');
 }
 
 $dataDevolucao = $_POST['dataDevolucao'] ?? date('Y-m-d');
@@ -18,8 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = 'Informe uma data de devolução válida.';
     } else {
         $sistema->devolverLocacao($locacao, $data);
-        salvarSistema($sistema);
-        redirecionar('locacoes.php?sucesso=devolucao');
+        redirecionar('pages/locacoes.php?sucesso=devolucao');
     }
 }
 
@@ -81,7 +80,7 @@ renderPageHeader('Devolução de filme', 'Finalize a locação, calcule multa po
                     </div>
                 <?php endif; ?>
                 <div class="col-12 d-flex gap-2 justify-content-end">
-                    <a class="btn btn-outline-secondary" href="locacoes.php">Cancelar</a>
+                    <a class="btn btn-outline-secondary" href="pages/locacoes.php">Cancelar</a>
                     <button class="btn btn-primary" type="submit"><i class="bi bi-check2 me-2"></i>Confirmar devolução</button>
                 </div>
             </form>

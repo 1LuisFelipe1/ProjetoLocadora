@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $erro = '';
 $clienteSelecionado = (int)($_GET['cliente_id'] ?? ($_POST['cliente_id'] ?? 0));
@@ -17,10 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = 'Este cliente não possui idade suficiente para a classificação do filme.';
     } elseif (!$filme->estaDisponivel()) {
         $erro = 'Este filme está sem estoque no momento.';
-    } elseif ($filme->alugar()) {
+    } else {
         $sistema->realizarLocacao($cliente, $filme, $diasSelecionados, proximoId('locacaoId'));
-        salvarSistema($sistema);
-        redirecionar('locacoes.php?sucesso=locacao');
+        redirecionar('pages/locacoes.php?sucesso=locacao');
     }
 }
 
@@ -71,7 +70,7 @@ renderPageHeader('Nova locação', 'Selecione cliente, filme e prazo para valida
                     <div class="form-control bg-light"><?= moeda($valorPreview) ?></div>
                 </div>
                 <div class="col-12 d-flex gap-2 justify-content-end">
-                    <a class="btn btn-outline-secondary" href="locacoes.php">Cancelar</a>
+                    <a class="btn btn-outline-secondary" href="pages/locacoes.php">Cancelar</a>
                     <button class="btn btn-primary" type="submit"><i class="bi bi-check2 me-2"></i>Confirmar locação</button>
                 </div>
             </form>

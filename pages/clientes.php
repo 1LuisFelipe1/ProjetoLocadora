@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $busca = trim($_GET['busca'] ?? '');
 $clientes = $sistema->listarClientes();
@@ -16,7 +16,7 @@ renderFeedback();
 renderPageHeader(
     'Clientes',
     'Consulte os clientes cadastrados, veja idade, histórico e inicie novas locações.',
-    '<a class="btn btn-primary" href="cliente_form.php"><i class="bi bi-person-plus me-2"></i>Novo cliente</a>'
+    '<a class="btn btn-primary" href="pages/cliente_form.php"><i class="bi bi-person-plus me-2"></i>Novo cliente</a>'
 );
 ?>
 
@@ -62,10 +62,10 @@ renderPageHeader(
                             <?= $cliente->getIdade() >= 18 ? '<span class="badge text-bg-primary">Maior de idade</span>' : '<span class="badge text-bg-warning text-dark">Menor de idade</span>' ?>
                         </td>
                         <td class="text-end">
-                            <a class="btn btn-sm btn-outline-secondary" href="cliente_detalhes.php?id=<?= h($cliente->getId()) ?>" title="Ver detalhes">
+                            <a class="btn btn-sm btn-outline-secondary" href="pages/cliente_detalhes.php?id=<?= h($cliente->getId()) ?>" title="Ver detalhes">
                                 <i class="bi bi-eye"></i>
                             </a>
-                            <a class="btn btn-sm btn-outline-primary" href="nova_locacao.php?cliente_id=<?= h($cliente->getId()) ?>" title="Nova locação">
+                            <a class="btn btn-sm btn-outline-primary" href="pages/nova_locacao.php?cliente_id=<?= h($cliente->getId()) ?>" title="Nova locação">
                                 <i class="bi bi-bag-plus"></i>
                             </a>
                         </td>

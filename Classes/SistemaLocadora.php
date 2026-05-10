@@ -25,6 +25,7 @@ class SistemaLocadora
 
     public function realizarLocacao(Cliente $cliente, Filme $filme, int $dias, ?int $id = null): Locacao
     {
+        $filme->alugar();
         $locacao = new Locacao($cliente, $filme, $dias, $id);
         $this->locacoes[] = $locacao;
 

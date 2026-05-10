@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $locacoes = $sistema->listarLocacoes();
 $finalizadas = $sistema->listarLocacoesFinalizadas();

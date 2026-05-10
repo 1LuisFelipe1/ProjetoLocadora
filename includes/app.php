@@ -1,5 +1,7 @@
 <?php
 
+define('BASE_URL', '/ProjetoLocadora');
+
 require_once __DIR__ . '/../Classes/Filme.php';
 require_once __DIR__ . '/../Classes/Cliente.php';
 require_once __DIR__ . '/../Classes/Locacao.php';
@@ -42,7 +44,6 @@ if (
         $sistemaInicial->cadastrarCliente($cliente);
     }
 
-    $filmes[0]->alugar();
     $sistemaInicial->realizarLocacao($clientes[0], $filmes[0], 3, 1);
 
     $_SESSION['sistema'] = $sistemaInicial;
@@ -83,11 +84,6 @@ function proximoId(string $chave): int
 
     $_SESSION[$chave]++;
     return $_SESSION[$chave];
-}
-
-function salvarSistema(SistemaLocadora $sistema): void
-{
-    $_SESSION['sistema'] = $sistema;
 }
 
 function redirecionar(string $destino): never

@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $busca = trim($_GET['busca'] ?? '');
 $generoFiltro = trim($_GET['genero'] ?? '');
@@ -34,7 +34,7 @@ renderFeedback();
 renderPageHeader(
     'Catálogo de filmes',
     'Gerencie títulos, estoque, classificação indicativa e valores de locação.',
-    '<a class="btn btn-primary" href="filme_form.php"><i class="bi bi-plus-circle me-2"></i>Novo filme</a>'
+    '<a class="btn btn-primary" href="pages/filme_form.php"><i class="bi bi-plus-circle me-2"></i>Novo filme</a>'
 );
 ?>
 
@@ -103,7 +103,7 @@ renderPageHeader(
                         <strong class="text-dark"><?= moeda($filme->getPrecoLocacao()) ?></strong>
                     </div>
                     <div class="d-grid mt-3">
-                        <a class="btn btn-outline-primary <?= !$filme->estaDisponivel() ? 'disabled' : '' ?>" href="nova_locacao.php?filme_id=<?= h($filme->getId()) ?>">
+                        <a class="btn btn-outline-primary <?= !$filme->estaDisponivel() ? 'disabled' : '' ?>" href="pages/nova_locacao.php?filme_id=<?= h($filme->getId()) ?>">
                             <i class="bi bi-bag-plus me-2"></i>Alugar
                         </a>
                     </div>

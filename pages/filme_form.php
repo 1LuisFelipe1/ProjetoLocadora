@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/app.php';
-require_once __DIR__ . '/includes/layout.php';
+require_once __DIR__ . '/../includes/app.php';
+require_once __DIR__ . '/../includes/layout.php';
 
 $erro = '';
 $valores = [
@@ -36,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         $sistema->cadastrarFilme($filme);
-        salvarSistema($sistema);
-        redirecionar('filmes.php?sucesso=filme');
+        redirecionar('pages/filmes.php?sucesso=filme');
     }
 }
 
@@ -80,7 +79,7 @@ renderPageHeader('Cadastro de filme', 'Adicione um novo título ao catálogo com
             <input class="form-control" type="number" min="0" step="0.01" id="precoLocacao" name="precoLocacao" value="<?= h($valores['precoLocacao']) ?>" required>
         </div>
         <div class="col-12 d-flex gap-2 justify-content-end">
-            <a class="btn btn-outline-secondary" href="filmes.php">Cancelar</a>
+            <a class="btn btn-outline-secondary" href="pages/filmes.php">Cancelar</a>
             <button class="btn btn-primary" type="submit"><i class="bi bi-check2 me-2"></i>Salvar filme</button>
         </div>
     </form>
