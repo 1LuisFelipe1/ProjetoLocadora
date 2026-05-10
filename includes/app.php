@@ -1,11 +1,13 @@
 <?php
 
-define('BASE_URL', '/ProjetoLocadora');
+define('BASE_URL', '/locadora');
+define('TMDB_API_KEY', 'b58acbe348f00ffae9ee2b5091b0e234');
 
 require_once __DIR__ . '/../Classes/Filme.php';
 require_once __DIR__ . '/../Classes/Cliente.php';
 require_once __DIR__ . '/../Classes/Locacao.php';
 require_once __DIR__ . '/../Classes/SistemaLocadora.php';
+require_once __DIR__ . '/../assets/TmdbService.php';
 
 session_start();
 
@@ -18,16 +20,11 @@ if (isset($_GET['resetar'])) {
 if (
     !isset($_SESSION['sistema'])
     || !($_SESSION['sistema'] instanceof SistemaLocadora)
-    || ($_SESSION['schemaVersion'] ?? 0) !== 2
+    || ($_SESSION['schemaVersion'] ?? 0) !== 3
 ) {
     $sistemaInicial = new SistemaLocadora();
 
     $filmes = [
-        new Filme(1, 'Matrix', 'Ação', 1999, '16', 3, 10.00),
-        new Filme(2, 'Vingadores: Ultimato', 'Aventura', 2019, '12', 5, 12.00),
-        new Filme(3, 'Divertida Mente', 'Animação', 2015, 'Livre', 4, 8.00),
-        new Filme(4, 'Cidade de Deus', 'Drama', 2002, '18', 2, 11.50),
-        new Filme(5, 'O Auto da Compadecida', 'Comédia', 2000, '12', 1, 9.50),
     ];
 
     $clientes = [
@@ -50,7 +47,7 @@ if (
     $_SESSION['clienteId'] = 3;
     $_SESSION['filmeId'] = 5;
     $_SESSION['locacaoId'] = 1;
-    $_SESSION['schemaVersion'] = 2;
+    $_SESSION['schemaVersion'] = 3;
 }
 
 $sistema = $_SESSION['sistema'];

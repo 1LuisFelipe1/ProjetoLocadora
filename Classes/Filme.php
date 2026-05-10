@@ -9,8 +9,9 @@ class Filme
     private string $classificacao;
     private int $quantidade;
     private float $precoLocacao;
+    private string $posterUrl = '';
 
-    public function __construct(int $id, string $titulo, string $genero, int $ano, string $classificacao, int $quantidade, float $precoLocacao)
+    public function __construct(int $id, string $titulo, string $genero, int $ano, string $classificacao, int $quantidade, float $precoLocacao, string $posterUrl)
     {
         $this->id = $id;
         $this->titulo = $titulo;
@@ -19,6 +20,7 @@ class Filme
         $this->classificacao = $classificacao;
         $this->quantidade = $quantidade;
         $this->precoLocacao = $precoLocacao;
+        $this->posterUrl = $posterUrl;
     }
 
     public function getId(): int
@@ -104,6 +106,14 @@ class Filme
     public function devolver(): void
     {
         $this->quantidade++;
+    }
+
+    public function getFilmeURL() : string {
+        return $this->posterUrl ?? '';
+    }
+
+    public function setFilmeURL(string $novaURL) {
+        $this->posterUrl = $novaURL;
     }
 
     public function exibirDados(): array

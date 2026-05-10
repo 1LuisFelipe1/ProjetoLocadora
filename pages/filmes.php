@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../includes/app.php';
 require_once __DIR__ . '/../includes/layout.php';
 
+
 $busca = trim($_GET['busca'] ?? '');
 $generoFiltro = trim($_GET['genero'] ?? '');
 $disponibilidade = trim($_GET['disponibilidade'] ?? '');
@@ -39,6 +40,7 @@ renderPageHeader(
 ?>
 
 <section class="content-surface mb-4">
+        
     <form class="row g-2" method="get">
         <div class="col-lg-5">
             <label class="visually-hidden" for="busca">Buscar filme</label>
@@ -81,7 +83,7 @@ renderPageHeader(
                 <article class="movie-tile">
                     <div class="d-flex justify-content-between align-items-start gap-3">
                         <div class="d-flex gap-3">
-                            <span class="movie-cover"><i class="bi bi-play-fill"></i></span>
+                            <span class="movie-cover"><img src="<?= h($filme->getFilmeURL() ?: 'https://placehold.co/90x135?text=Sem+Imagem') ?>" alt="" class="img-fluid w-100 h-100 object-fit-cover rounded"></span>
                             <div>
                                 <h2 class="h5 mb-1"><?= h($filme->getTitulo()) ?></h2>
                                 <p class="text-muted mb-2"><?= h($filme->getGenero()) ?> · <?= h($filme->getAno()) ?></p>
