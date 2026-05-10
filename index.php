@@ -2,11 +2,37 @@
 
 /* CODIGO FEITO PARA TESTE DE SCRIPT */
 
-
-require_once 'Classes/Filme.php';
-require_once 'Classes/Cliente.php';
-require_once 'Classes/Locacao.php';
 require_once 'Classes/SistemaLocadora.php';
+require_once 'Classes/Cliente.php';
+
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SESSION['sistema'])) {
+        $_SESSION['sistema'] = new SistemaLocadora([], [], []);
+    }
+    $sistema = $_SESSION['sistema'];
+
+    if (!isset($_SESSION['clienteId'])) {
+        $_SESSION['clienteId'] = 0;
+    }
+    $_SESSION['clienteId']++;
+
+    $cliente = new Cliente(
+        $_SESSION['clienteId'],
+        $_POST['nome'],
+        $_POST['cpf'],
+        $_POST['telefone'],
+        date('d/m/Y', strtotime($_POST['dataDeNascimento'])),
+        $_POST['endereco']
+    );
+    $sistema->cadastrarCliente($cliente);
+    $_SESSION['ultimoCliente'] = $cliente;
+    header('Location: painel.php');
+    exit;
+}
+
+require_once 'Classes/Locacao.php';
+require_once 'Classes/Filme.php';
 
 // Criando sistema
 $sistema = new SistemaLocadora([], [], []);
@@ -16,14 +42,34 @@ $filme1 = new Filme(1, "Matrix", "Ação", 1999, "16", 3, 10.0);
 $filme2 = new Filme(2, "Vingadores", "Ação", 2019, "12", 5, 12.0);
 
 // Criando clientes
-$cliente1 = new Cliente(1, "Gabriel", "12345678900", "99999-9999", "01/01/2000", "Rua A");
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['nome'])) {
+    $cliente1 = new Cliente(
+        1,
+        $_GET['nome'],
+        $_GET['cpf'],
+        $_GET['telefone'],
+        $_GET['dataDeNascimento'],
+        $_GET['endereco']
+    );
+    $sistema->cadastrarCliente($cliente1);
+}
 $cliente2 = new Cliente(2, "Maria", "98765432100", "88888-8888", "01/01/2010", "Rua B");
 
 // Cadastrando
 $sistema->cadastrarFilme($filme1);
 $sistema->cadastrarFilme($filme2);
 
-$sistema->cadastrarCliente($cliente1);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['nome'])) {
+    $cliente1 = new Cliente(
+        1,
+        $_GET['nome'],
+        $_GET['cpf'],
+        $_GET['telefone'],
+        $_GET['dataDeNascimento'],
+        $_GET['endereco']
+    );
+    $sistema->cadastrarCliente($cliente1);
+}
 $sistema->cadastrarCliente($cliente2);
 
 // Listando
@@ -81,5 +127,4 @@ if (!empty($locacoes)) {
         echo $chave . $valor . PHP_EOL;
     }
 }
-
 ?>
