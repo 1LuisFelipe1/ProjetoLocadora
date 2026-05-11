@@ -139,7 +139,7 @@ renderPageHeader('Cadastro de filme', 'Busque pelo título na base TMDB e os dad
         results.innerHTML = '';
 
         try {
-            const res = await fetch(`/locadora/assets/api/tmdb-search.php?action=search&q=${encodeURIComponent(q)}`);
+            const res = await fetch(`/ProjetoLocadora/assets/api/tmdb-search.php?action=search&q=${encodeURIComponent(q)}`);
             const data = await res.json();
             renderResults(data.results ?? []);
         } catch {
@@ -178,7 +178,7 @@ renderPageHeader('Cadastro de filme', 'Busque pelo título na base TMDB e os dad
     async function selectMovie(tmdbId) {
         spinner.classList.remove('d-none');
         try {
-            const res = await fetch(`/locadora/assets/api/tmdb-search.php?action=details&id=${tmdbId}`);
+            const res = await fetch(`/ProjetoLocadora/assets/api/tmdb-search.php?action=details&id=${tmdbId}`);
             const details = await res.json();
             if (details.error) throw new Error(details.error);
             fillForm(details);

@@ -1,13 +1,13 @@
 <?php
 
-define('BASE_URL', '/locadora');
+define('BASE_URL', '/ProjetoLocadora');
 define('TMDB_API_KEY', 'b58acbe348f00ffae9ee2b5091b0e234');
 
 require_once __DIR__ . '/../Classes/Filme.php';
 require_once __DIR__ . '/../Classes/Cliente.php';
 require_once __DIR__ . '/../Classes/Locacao.php';
 require_once __DIR__ . '/../Classes/SistemaLocadora.php';
-require_once __DIR__ . '/../assets/TmdbService.php';
+require_once __DIR__ . '/../assets/api/TmdbService.php';
 
 session_start();
 
@@ -25,6 +25,8 @@ if (
     $sistemaInicial = new SistemaLocadora();
 
     $filmes = [
+        new Filme(1, 'O Poderoso Chefão', 'Crime/Drama', 1972, '16', 3, 9.90, ''),
+        new Filme(2, 'Toy Story', 'Animação/Família', 1995, 'Livre', 5, 7.50, ''),
     ];
 
     $clientes = [
@@ -45,7 +47,7 @@ if (
 
     $_SESSION['sistema'] = $sistemaInicial;
     $_SESSION['clienteId'] = 3;
-    $_SESSION['filmeId'] = 5;
+    $_SESSION['filmeId'] = 2;
     $_SESSION['locacaoId'] = 1;
     $_SESSION['schemaVersion'] = 3;
 }

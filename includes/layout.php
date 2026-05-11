@@ -18,7 +18,7 @@ function renderHeader(string $titulo, string $ativo = 'dashboard'): void
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= BASE_URL ?>/">
         <title><?= h($titulo) ?> | DiguinhoMax</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
         <link href="<?= BASE_URL ?>/assets/css/app.css" rel="stylesheet">
     </head>
@@ -112,7 +112,7 @@ function renderFooter(): void
     ?>
         </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
     </html>
     <?php
