@@ -1,7 +1,7 @@
 <?php
 
 define('BASE_URL', '/ProjetoLocadora');
-define('TMDB_API_KEY', 'b58acbe348f00ffae9ee2b5091b0e234');
+require_once __DIR__ . '/../config.local.php';
 
 require_once __DIR__ . '/../Classes/Filme.php';
 require_once __DIR__ . '/../Classes/Cliente.php';
@@ -67,6 +67,26 @@ function moeda(float $valor): string
 function dataBr(DateTime $data): string
 {
     return $data->format('d/m/Y');
+}
+
+function validarCpf(string $cpf): bool
+{
+    $cpf = preg_replace('/\D/', '', $cpf);
+    if (strlen($cpf) !== 11 || preg_match('/(\d)\1{10}/', $cpf)) {
+        return false;
+    }
+
+    for ($t = 9; $t < 11; $t++) {
+        $soma = 0;
+        for ($i = 0; $i < $t; $i++) {
+            $soma += (int)$cpf[$i] * ($t + 1 - $i);
+        }
+        $resto = (10 * $soma) % 11;
+        if ((int)$cpf[$t] !== ($resto < 2 ? 0 : 11 - $resto)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function dataParaBr(string $data): string

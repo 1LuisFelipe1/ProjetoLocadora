@@ -25,7 +25,10 @@ class SistemaLocadora
 
     public function realizarLocacao(Cliente $cliente, Filme $filme, int $dias, ?int $id = null): Locacao
     {
-        $filme->alugar();
+        if (!$filme->alugar()) {
+            throw new RuntimeException("Filme sem estoque disponível.");
+        }
+
         $locacao = new Locacao($cliente, $filme, $dias, $id);
         $this->locacoes[] = $locacao;
 

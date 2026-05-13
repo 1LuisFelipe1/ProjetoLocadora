@@ -80,6 +80,11 @@ body {
     background: var(--dm-sidebar-soft);
 }
 
+.app-mobile-nav .nav-link.active {
+    color: var(--dm-primary);
+    font-weight: 600;
+}
+
 .sidebar-footer {
     margin-top: auto;
     padding: 14px;

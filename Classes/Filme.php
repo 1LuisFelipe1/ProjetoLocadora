@@ -112,7 +112,7 @@ class Filme
         return $this->posterUrl ?? '';
     }
 
-    public function setFilmeURL(string $novaURL) {
+    public function setFilmeURL(string $novaURL): void {
         $this->posterUrl = $novaURL;
     }
 

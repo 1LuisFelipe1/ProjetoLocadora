@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (in_array('', $valores, true)) {
         $erro = 'Preencha todos os campos obrigatórios.';
-    } elseif (strlen(preg_replace('/\D/', '', $valores['cpf'])) !== 11) {
-        $erro = 'Informe um CPF válido com 11 dígitos.';
+    } elseif (!validarCpf($valores['cpf'])) {
+        $erro = 'Informe um CPF válido.';
     } else {
         $cliente = new Cliente(
             proximoId('clienteId'),

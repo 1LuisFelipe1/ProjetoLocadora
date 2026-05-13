@@ -67,7 +67,7 @@ renderPageHeader('Nova locação', 'Selecione cliente, filme e prazo para valida
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Valor estimado</label>
-                    <div class="form-control bg-light"><?= moeda($valorPreview) ?></div>
+                    <div class="form-control bg-light" id="valorEstimado"><?= moeda($valorPreview) ?></div>
                 </div>
                 <div class="col-12 d-flex gap-2 justify-content-end">
                     <a class="btn btn-outline-secondary" href="pages/locacoes.php">Cancelar</a>
@@ -99,5 +99,29 @@ renderPageHeader('Nova locação', 'Selecione cliente, filme e prazo para valida
         </section>
     </div>
 </div>
+
+<script>
+(function () {
+    const diasInput   = document.getElementById('dias');
+    const filmeSelect = document.getElementById('filme_id');
+    const valorDiv    = document.getElementById('valorEstimado');
+
+    const precos = <?= json_encode(array_combine(
+        array_map(fn(Filme $f) => $f->getId(), $sistema->listarFilmes()),
+        array_map(fn(Filme $f) => $f->getPrecoLocacao(), $sistema->listarFilmes())
+    )) ?>;
+
+    function atualizar() {
+        const filmeId = parseInt(filmeSelect.value) || 0;
+        const dias    = Math.max(1, parseInt(diasInput.value) || 1);
+        const preco   = precos[filmeId] ?? 0;
+        const total   = preco * dias;
+        valorDiv.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    }
+
+    diasInput.addEventListener('input', atualizar);
+    filmeSelect.addEventListener('change', atualizar);
+})();
+</script>
 
 <?php renderFooter(); ?>

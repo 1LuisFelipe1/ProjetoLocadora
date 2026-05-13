@@ -20,6 +20,7 @@ arsort($filmesMaisAlugados);
 arsort($clientesMaisAtivos);
 
 renderHeader('Relatórios', 'relatorios');
+renderFeedback();
 renderPageHeader('Relatórios', 'Indicadores simples para apresentar o funcionamento da locadora.');
 ?>
 
