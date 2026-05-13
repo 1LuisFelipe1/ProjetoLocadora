@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         $sistema->cadastrarCliente($cliente);
-        redirecionar('pages/clientes.php?sucesso=cliente');
+        redirecionar(BASE_URL . '/pages/clientes.php?sucesso=cliente');
     }
 }
 

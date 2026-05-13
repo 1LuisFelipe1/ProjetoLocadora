@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         $sistema->cadastrarFilme($filme);
-        redirecionar('/locadora/pages/filmes.php?sucesso=filme');
+        redirecionar(BASE_URL . '/pages/filmes.php?sucesso=filme');
     }
 }
 

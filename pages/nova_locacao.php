@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = 'Este filme está sem estoque no momento.';
     } else {
         $sistema->realizarLocacao($cliente, $filme, $diasSelecionados, proximoId('locacaoId'));
-        redirecionar('pages/locacoes.php?sucesso=locacao');
+        redirecionar(BASE_URL . '/pages/locacoes.php?sucesso=locacao');
     }
 }
 

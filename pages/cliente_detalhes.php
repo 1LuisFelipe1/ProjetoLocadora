@@ -5,7 +5,7 @@ require_once __DIR__ . '/../includes/layout.php';
 $cliente = $sistema->buscarCliente((int)($_GET['id'] ?? 0));
 
 if (!$cliente) {
-    redirecionar('pages/clientes.php');
+    redirecionar(BASE_URL . '/pages/clientes.php');
 }
 
 $historico = locacoesDoCliente($sistema, $cliente);

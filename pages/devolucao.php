@@ -6,7 +6,7 @@ $locacao = $sistema->buscarLocacao((int)($_GET['id'] ?? ($_POST['id'] ?? 0)));
 $erro = '';
 
 if (!$locacao || $locacao->estaFinalizada()) {
-    redirecionar('pages/locacoes.php');
+    redirecionar(BASE_URL . '/pages/locacoes.php');
 }
 
 $dataDevolucao = $_POST['dataDevolucao'] ?? date('Y-m-d');
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = 'Informe uma data de devolução válida.';
     } else {
         $sistema->devolverLocacao($locacao, $data);
-        redirecionar('pages/locacoes.php?sucesso=devolucao');
+        redirecionar(BASE_URL . '/pages/locacoes.php?sucesso=devolucao');
     }
 }
 
