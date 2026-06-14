@@ -1,7 +1,8 @@
 <?php
 
 define('BASE_URL', '/ProjetoLocadora');
-require_once __DIR__ . '/../config.local.php';
+$env = parse_ini_file(__DIR__ . '/../env');
+define('TMDB_API_KEY', $env['API_KEY'] ?? '');
 
 require_once __DIR__ . '/../Classes/Filme.php';
 require_once __DIR__ . '/../Classes/Cliente.php';
