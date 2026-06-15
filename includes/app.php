@@ -1,6 +1,6 @@
 <?php
 
-define('BASE_URL', '/ProjetoLocadora');
+define('BASE_URL', '');
 $env = parse_ini_file(__DIR__ . '/../env');
 define('TMDB_API_KEY', $env['API_KEY'] ?? '');
 
